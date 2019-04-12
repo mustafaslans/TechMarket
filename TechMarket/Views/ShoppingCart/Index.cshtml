@@ -1,0 +1,92 @@
+﻿@model TechMarket.Models.ViewModel.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Cart";
+}
+<head>
+    <script type="text/javascript">
+        $(function () {
+            $(".RemoveLink").click(function () {
+                var silinecekid = $(this).attr("data-id");
+                if (silinecekid != '') {
+                    $.post("/ShoppingCart/RemoveToCart", { "id": silinecekid },
+                        function (data) {
+                            if (data.itemCount == 0) {
+                                $("#item-count-" + data.Deletedid).fadeOut('slow');
+                            }
+                            else {
+                                $("#item-count-" + data.Deletedid).text(data.itemCount);
+                            }
+                            $("#cart-total").text(data.CartTotal);
+                            $("#update-message").text(data.Message);
+                            //$("#cart-status").text('(' + data.itemCount + ')');
+                        }
+                    )
+                }
+                location.reload();
+            })
+        })
+    </script>
+</head>
+<body>
+    <section class="cart-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="cart-table">
+                        <h3>Your Cart</h3>
+                        <div class="cart-table-warp">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="product-th">Product</th>
+                                        <th class="size-th">Quantity</th>
+                                        <th class="total-th">Price</th>
+                                        <th class="total-th"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CartItems)
+                                    {
+                                        <tr id="row-@item.RecordId">
+                                            <td class="product-col">
+                                                <img src="@Url.Content(item.Product.Photo)" alt="">
+                                                <div class="pc-title">
+                                                    <h4>@Html.DisplayFor(modelItem => item.Product.Marka) @Html.DisplayFor(modelItem => item.Product.Model)</h4>
+                                                </div>
+                                            </td>
+                                            <td class="quy-col" id="item-count-@item.RecordId">
+                                                <div class="quantity">
+                                                    <div class="pro-qty">
+                                                        <input type="text" value="@item.Count">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="total-col"><h4>@item.Product.Price $</h4></td>
+                                            <td class="total-col">
+                                                <a href="#" class="RemoveLink site-btn" data-id="@item.RecordId">
+                                                    Remove
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="total-cost">
+                            <h6>Total <span>@Model.CartTotal $</span></h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 card-right">
+                    <form class="promo-code-form">
+                        <input type="text" placeholder="Enter promo code">
+                        <button>Submit</button>
+                    </form>
+                    <a href="@Url.Action("AddressAndPayment","Checkout",new { total = Model.CartTotal })" class="site-btn">Proceed to checkout</a>
+                    <a href="@Url.Action("Index","Home")" class="site-btn sb-dark">Continue shopping</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+

@@ -1,0 +1,221 @@
+﻿<html>
+<head>
+    <title>AslanTech | Mustafa Aslan</title>
+    <meta charset="UTF-8">
+    <meta name="description" content=" AslanTech | Mustafa Aslan">
+    <meta name="keywords" content="divisima, eCommerce, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/img/favicon.ico" rel="shortcut icon" />
+    @*<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">*@
+    <link href="~/Content/css/css.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/Content/css/flaticon.css" />
+    <link rel="stylesheet" href="~/Content/css/slicknav.min.css" />
+    <link rel="stylesheet" href="~/Content/css/jquery-ui.min.css" />
+    <link rel="stylesheet" href="~/Content/css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="~/Content/css/animate.css" />
+    <link rel="stylesheet" href="~/Content/css/style.css" />
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/jquery.slicknav.min.js"></script>
+    <script src="~/Content/js/owl.carousel.min.js"></script>
+    <script src="~/Content/js/jquery.nicescroll.min.js"></script>
+    <script src="~/Content/js/jquery.zoom.min.js"></script>
+    <script src="~/Content/js/jquery-ui.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+</head>
+<body>
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
+    <header class="header-section">
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 text-center text-lg-left">
+                        <a href="@Url.Action("Index", "Home")" class="site-logo">
+                            <img src="~/Content/img/Adsız.png" alt="" width="161" height="50">
+                        </a>
+                    </div>
+                    <div class="col-xl-6 col-lg-5">
+                        <form class="header-search-form center-block">
+                            <input id="ara" type="text" placeholder="Search in AslanTech....">
+                            <button id="arabtn"><i class="flaticon-search"></i></button>
+                        </form>
+                    </div>
+                    <div class="col-xl-4 col-lg-5">
+                        @if (!this.User.Identity.IsAuthenticated)
+                        {
+                            <div class="user-panel">
+                                <div class="up-item">
+                                    <i class="flaticon-profile"></i>
+                                    <a href="@Url.Action("Login", "Account")">Sign In</a> or <a href="@Url.Action("Register", "Account")">Create Account</a>
+                                </div>
+                                <div class="up-item">
+                                    <div class="shopping-card up-items">
+                                        <i class="flaticon-bag"></i>
+                                        <span><a>@{Html.RenderAction("CartSummary", "ShoppingCart");}</a></span>
+                                    </div>
+                                    <a href="@Url.Action("Index", "ShoppingCart")">Shopping Cart</a>
+                                </div>
+                            </div>
+                        }
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <div class="user-panel">
+                                <div class="up-item">
+                                    <i class="flaticon-profile"></i>
+                                    <a href="@Url.Action("LogOut", "Account")">Log Off</a>
+                                </div>
+                                <div class="up-item">
+                                    <div class="shopping-card up-items">
+                                        <i class="flaticon-bag"></i>
+                                        <span><a>@{Html.RenderAction("CartSummary", "ShoppingCart");}</a></span>
+                                    </div>
+                                    <a href="@Url.Action("Index", "ShoppingCart")">Shopping Cart</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="main-navbar">
+            <div class="container">
+                <ul class="main-menu">
+                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li><a href="@Url.Action("ProductList", "Products", new { category = "Laptop" })">Laptops</a></li>
+                    <li><a href="@Url.Action("ProductList", "Products", new { category = "Telefon" })">Phones</a></li>
+                    <li><a href="@Url.Action("ProductList", "Products", new { category = "Aksesuar" })">Accessories</a></li>
+                    @if (this.User.IsInRole("Producer"))
+                    {
+                        <li><a href="@Url.Action("Index", "Products")">Products</a></li>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+    <section class="footer-section">
+        <div class="container">
+            <div class="footer-logo text-center">
+                <a href="index.html"><img src="~/Content/img/logo-light.png" alt=""></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widget about-widget">
+                        <h2>About</h2>
+                        <p>Developed by Mustafa Aslan</p>
+                        <img src="~/Content/img/cards.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widget about-widget">
+                        <h2>Quick Menu</h2>
+                        <ul>
+                            <li><a href="">About Us</a></li>
+                            <li><a href="@Url.Action("ProductList", "Products", new { category = "Laptop" })">Laptops</a></li>
+                            <li><a href="@Url.Action("ProductList", "Products", new { category = "Telefon" })">Phones</a></li>
+                            <li><a href="@Url.Action("ProductList", "Products", new { category = "Aksesuar" })">Accessories</a></li>
+                            <li><a href="">Shipping</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="footer-widget contact-widget">
+                        <h2>Informations</h2>
+                        <div class="con-info">
+                            <span>C.</span>
+                            <p>Wissen Akademie</p>
+                        </div>
+                        <div class="con-info">
+                            <span>B.</span>
+                            <p>Arnavutköy / Istanbul</p>
+                        </div>
+                        <div class="con-info">
+                            <span>P.</span>
+                            <p>+90 555 555 55 55</p>
+                        </div>
+                        <div class="con-info">
+                            <span>E.</span>
+                            <p>must.aslan@outlook.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-links-warp">
+            <div class="container">
+                <div class="social-links">
+                    <a></a>
+                    <a href="http://www.instagram.com/mustafaslans" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+                    <a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
+                    <a href="https://www.linkedin.com/in/mustafa-aslan/" class="pinterest"><i><img src="~/Content/img/linkedin-logo.png" width="30" height="30" /></i><span>LinkedIn</span></a>
+                    @*<a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>*@
+                    @*<a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>*@
+                    <a href="https://github.com/mustafaslans" class="tumblr"><i><img src="~/Content/img/github-153-675523.png" width="30" height="30" /></i><span>GitHub</span></a>
+                </div>
+                <p class="text-white text-center mt-5">
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function Contains(text_one, text_two) {
+                if (text_one.indexOf(text_two) != -1)
+                    return true;
+            }
+            $('#ara').keyup(function () {
+                var searchText = $('#ara').val().toLowerCase();
+                $('.Search').each(function () {
+                    if (!Contains($(this).text().toLowerCase(), searchText)) {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show();
+                    }
+                })
+            });
+        });
+    </script>
+    @*<script type="text/javascript">
+        $(document).ready(function () {
+            function Between(text_one, text_two) {
+                if (text_one.indexOf(text_two) != -1)
+                    return true;
+            }
+            $('#maxamount,#minamount').keyup(function () {
+                var min, max;
+                min = $('#minamount').val();
+                max = $('#maxamount').val();
+                console.log(max);
+                var price = $('#aralik').text();
+                $('.Search').each(function () {
+                    if (!Between(min, max)) {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show();
+                    }
+                })
+            });
+        });
+    </script>*@
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/jquery.slicknav.min.js"></script>
+    <script src="~/Content/js/owl.carousel.min.js"></script>
+    <script src="~/Content/js/jquery.nicescroll.min.js"></script>
+    <script src="~/Content/js/jquery.zoom.min.js"></script>
+    <script src="~/Content/js/jquery-ui.min.js"></script>
+    <script src="~/Content/js/main.js"></script>
+</body>
+</html>

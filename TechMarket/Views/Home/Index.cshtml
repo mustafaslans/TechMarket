@@ -1,0 +1,159 @@
+﻿@model IEnumerable<TechMarket.Models.Siniflar.Product>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<body>
+    <!-- Category section -->
+    <section class="category-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 order-2 order-lg-1">
+                    <div class="filter-widget">
+                        <h2 class="fw-title">Categories</h2>
+                        <ul class="category-menu">
+                            <li>
+                                <a href="@Url.Action("Index", "Home", new { category = "Laptop" })">Laptops</a>
+                                <ul class="sub-menu">
+                                    <li><a href="@Url.Action("Index", "Home", new { markaLap = "Asus" })">Asus</a></li>
+                                    <li><a href="@Url.Action("Index", "Home", new { markaLap = "Dell" })">Dell</a></li>
+                                    <li><a href="@Url.Action("Index", "Home", new { markaLap = "Toshiba" })">Toshiba</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Home", new { category = "Telefon" })">Phones</a>
+                                <ul class="sub-menu">
+                                    <li><a href="@Url.Action("Index", "Home", new { markaTel = "Apple" })">Apple</a></li>
+                                    <li><a href="@Url.Action("Index", "Home", new { markaTel = "LG" })">LG</a></li>
+                                    <li><a href="@Url.Action("Index", "Home", new { markaTel = "Samsung" })">Samsung</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Home", new { category = "Aksesuar" })">Accessories</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="filter-widget mb-0">
+                        <h2 class="fw-title">refine by</h2>
+                        <h4>Price</h4>
+                        <ul class="category-menu">
+                            <li>
+                                <a href="@Url.Action("Index", "Home", new { min = 500, max = 1500 })">500-1500$</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Home", new { min = 1500, max = 2500 })">1500-2500$</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Home", new { min = 2500, max = 5000 })">2500-5000$</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Home", new { min = 5000, max = 10000 })">5000-10000$</a>
+                            </li>
+                        </ul>
+                        @*<div class="price-range-wrap">
+                            <h4>Price ($)</h4>
+                            <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" data-min="1"datamax="10000">
+                                <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 100%;"></div>
+                                <span tabindex="0" id="slidermin" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;">
+                                </span>
+                                <span tabindex="0" id="slidermax" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;">
+                                </span>
+                            </div>
+                            <div>
+                                <div>
+                                    Min. :
+                                    <input style="border-color:#808080; border-radius:5px; border-style:hidden" id="minamount" type="text" value="">
+                                    <hr />
+                                    Max. :
+                                    <input style="border-color:#808080; border-radius:5px; border-style:hidden" id="maxamount" type="text" value="">
+                                    <hr />
+                                    <Button class="site-btn para">Search</Button>
+                                    <a href="@Url.Action("Index", "Home", new { min = 500,max=1500 })"style="color:aliceblue;width:150px;height:30px;marginleft:52.5px;backgroundcolor:#ba053c;bordercolor:#ba053c;textalign:center;vertical-align:central" class="btn">500-150$</a>
+                                    <hr style="width:150px" />
+                                    <a href="@Url.Action("Index", "Home", new { min = 1500,max=2500 })"style="color:aliceblue;width:150px;height:30px;marginleft:52.5px;backgroundcolor:#ba053c;bordercolor:#ba053c;textalign:center;vertical-align:central"class="btn">1500-2500$</a>
+                                    <hr style="width:150px" />
+                                    <a href="@Url.Action("Index", "Home", new { min = 2500,max=5000 })"style="color:aliceblue;width:150px;height:30px;marginleft:52.5px;backgroundcolor:#ba053c;bordercolor:#ba053c;textalign:center;vertical-align:central"class="btn">2500-5000$</a>
+                                    <hr style="width:150px" />
+                                    <a href="@Url.Action("Index", "Home", new { min = 5000,max=10000 })"style="color:aliceblue;width:150px;height:30px;marginleft:52.5px;backgroundcolor:#ba053c;bordercolor:#ba053c;textalign:center;vertical-align:central"class="btn">5000-10000$</a>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+                    <br />
+                    <br />
+                    <div class="filter-widget">
+                        <h2 class="fw-title">Brand</h2>
+                        <ul class="category-menu">
+                            <li><a href="@Url.Action("Index", "Home", new { marka = "Apple" })">Apple</a></li>
+                            <li><a href="@Url.Action("Index", "Home", new { marka = "Asus" })">Asus</a></li>
+                            <li><a href="@Url.Action("Index", "Home", new { marka = "Dell" })">Dell</a></li>
+                            <li><a href="@Url.Action("Index", "Home", new { marka = "Lg" })">Lg</a></li>
+                            <li><a href="@Url.Action("Index", "Home", new { marka = "Samsung" })">Samsung</a></li>
+                            <li><a href="@Url.Action("Index", "Home", new { marka = "Sennheiser" })">Sennheiser</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9  order-1 order-lg-2 mb-5 mb-lg-0">
+                    <div class="row" id="divac">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4 col-sm-6 Search">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <div class="tag-sale">ON SALE</div>
+                                        <a href="@Url.Action("TekUrun","Products", new  { id = item.ProductId})"><img class="image" src="@Url.Content(item.Photo)" alt="Image" width="315" height="315" /></a>
+                                        <div class="pi-links">
+                                            <a href="@Url.Action("AddToCart","ShoppingCart", new  { id = item.ProductId})" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                                            @*<a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>*@
+                                        </div>
+                                    </div>
+                                    <div class="pi-text" @item.Marka>
+                                        <h6 id="aralik">@item.Price $</h6>
+                                        <p>@item.Marka @item.Model</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="text-center w-100 pt-3">
+                            <button class="site-btn sb-line sb-dark">LOAD MORE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @*<script>
+            $('.para').click(function () {
+                $.ajax({
+                    method: "GET",
+                    url: "/Home/Index",
+                    data: jQuery.param({ min: $('#minamount').val(), max: $('#maxamount').val() }),
+                })
+            })
+        </script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function Between(text_one, text_two, text_three) {
+                if (text_one <= text_two & text_one >= text_three)
+                    return true;
+            }
+            var price = $('#aralik').text();
+            $('#minamount').keyup(function () {
+                var min;
+                min = $('#minamount').val();
+                $('#minamount').keyup(function () {
+                    var max;
+                    max = $('#maxamount').val();
+                    $('.Search').each(function () {
+                        if (!Between(price, min, max)) {
+                            $(this).show();
+                        }
+                        else {
+                            $(this).hide();
+                        }
+                    })
+                })
+            });
+        });
+    </script>
+</body>

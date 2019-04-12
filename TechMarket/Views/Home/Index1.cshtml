@@ -1,0 +1,57 @@
+﻿@model IEnumerable<TechMarket.Models.Siniflar.Product>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="product-filter-section">
+    <div class="container">
+        <div class="section-title">
+        </div>
+        <div id="result">
+
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-sm-6 Search">
+                    <div class="product-item">
+                        <div class="pi-pic">
+                            <a href="@Url.Action("TekUrun","Products", new  { id = item.ProductId})"><img class="image" src="@Url.Content(item.Photo)" alt="Image" width="315" height="315" /></a>
+                            <div class="pi-links">
+                                <a href="@Url.Action("AddToCart","ShoppingCart", new  { id = item.ProductId})" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                            </div>
+                        </div>
+                        <div class="pi-text" @item.Marka>
+                            <h6>@item.Price TL</h6>
+                            <p>@item.Marka @item.Model</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center pt-5">
+            <button class="site-btn sb-line sb-dark">LOAD MORE</button>
+        </div>
+    </div>
+    @*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+    @*<script>
+            //$(document).off('click', '#selector_id').on('click', '#selector_id', function (
+            $(document).off('click', '#arabtn').on('click', '#arabtn', function () {
+                             var product = new Object();
+                    product.Marka = $('#ara').val();
+                    if (product != null) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/Home/AraBul/" + product.Marka,
+                            dataType: "json",
+                            data: JSON.stringify(product),
+                            contentType: "application/json; charset=utf-8",
+                        });
+                    }
+                });
+        </script>*@
+</section>
+
+

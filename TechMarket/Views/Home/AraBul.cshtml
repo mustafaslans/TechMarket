@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TechMarket.Models.Siniflar.Product>
+@{
+    ViewBag.Title = "Home Page";
+}
+<script type="text/javascript" src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".RemoveLink").click(function () {
+            var silinecekid = $(this).attr("data-id");
+            if (silinecekid != '') {
+                $.post("/ShoppingCart/RemoveToCart", { "id": silinecekid },
+                    function (data) {
+                        if (data.itemCount == 0) {
+                            $("#item-count-" + data.Deletedid).fadeOut('slow');
+                        }
+                        else {
+                            $("#item-count-" + data.Deletedid).text(data.itemCount);
+                        }
+                        $("#cart-total").text(data.CartTotal);
+                        $("#update-message").text(data.Message);
+                        $("#cart-status").text('Cart(' + data.CartTotal + ')');
+                    }
+                )
+            }
+            location.reload();
+        })
+    })
+</script>
+<section class="product-filter-section">
+    <div class="container">
+        <div class="section-title">
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product-item">
+                        <div class="pi-pic">
+                            <img src="@Url.Content(item.Photo)" alt="Image" width="315" height="315" />
+                            <div class="pi-links">
+                                <a href="@Url.Action("AddToCart","ShoppingCart", new  { id = item.ProductId})" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                            </div>
+                        </div>
+                        <div class="pi-text">
+                            <h6>@item.Price TL</h6>
+                            <p>@item.Marka @item.Model</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center pt-5">
+            <button class="site-btn sb-line sb-dark">LOAD MORE</button>
+        </div>
+    </div>
+</section>
+
+

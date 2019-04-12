@@ -1,0 +1,148 @@
+﻿@model IEnumerable<TechMarket.Models.Siniflar.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+<head>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/Module.js"></script>
+    <script src="~/Scripts/Service.js"></script>
+    <script src="~/Scripts/ProductController.js"></script>
+
+</head>
+<br />
+<p>
+    <a href="@Url.Action("Create","Products")" class="btn btn-success">Create</a>
+</p>
+<div ng-app="myApp" ng-controller="myController" >
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayName("Brand")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+
+
+        <tr class="Search" ng-repeat="item in product">
+            <td>
+                {{item.CategoryString}}
+            </td>
+            <td>
+                {{item.Marka}}
+            </td>
+            <td>
+                {{item.Model}}
+            </td>
+            <td>
+                <img width="50" src="{{item.Photo}}" />
+            </td>
+            <td>
+                {{item.Description}}
+            </td>
+            <td>
+                {{item.Price}} $
+            </td>
+            <td>
+                <input type="button" class="Remove site-btn" ng-click="DeleteProduct(item)" value="Remove">
+            </td>
+            <td>
+                <input type="button" class="Edit site-btn" ng-click="editProduct(item)" value="Edit">
+            </td>
+        </tr>
+    </table>
+    <div ng-show="divProduct">
+        <div class="form-horizontal">
+            <h4>Product</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.Label("ProductId", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <input class="form-control" disabled="disabled" type="text" ng-model="productId" />
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    @*<select class="form-control" ng-model="productCategory" ng-change="showSelectValue(productCategory)">
+                            <option  ng-repeat="item in Category">{{item}} </option>
+                        </select>*@
+                    <select class="form-control" ng-model="productCategory" ng-change="showSelectValue(productCategory)">
+                        <option>Laptop</option>
+                        <option>Telefon</option>
+                        <option>Aksesuar</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Brand", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <input class="form-control" type="text" ng-model="productMarka" />
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Model", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <input class="form-control" type="text" ng-model="productModel" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <input class="form-control" type="text" ng-model="productDescription" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Price", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-4">
+                    <input class="form-control" type="text" ng-model="productPrice" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-success" value="Update" ng-click="UpdateProduct()" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<script type="text/javascript">
+        $(function () {
+            $(".Remove").click(function () {
+                console.log(1);
+                var silinecekid = $(this).val();
+                console.log(silinecekid);
+                if (silinecekid != '') {
+                    $.ajax({
+                        method: "POST",
+                        url: "/DeleteConfirmed/" + silinecekid,
+                        dataType: "json",
+                        data: JSON.stringify(silinecekid),
+                        succses: function (data) {
+                            alert("Bravo");
+                        }
+                    })
+                }
+                location.reload();
+            })
+        })
+    </script>*@

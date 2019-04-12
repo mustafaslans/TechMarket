@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: italic;
+  font-weight: 300;
+  src: local('Josefin Sans Light Italic'), local('JosefinSans-LightItalic'), url(https://fonts.gstatic.com/s/josefinsans/v13/Qw3HZQNVED7rKGKxtqIqX5EUCETRfm0jqpg.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Josefin Sans Italic'), local('JosefinSans-Italic'), url(https://fonts.gstatic.com/s/josefinsans/v13/Qw3EZQNVED7rKGKxtqIqX5EUCEx6XH4.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: italic;
+  font-weight: 700;
+  src: local('Josefin Sans Bold Italic'), local('JosefinSans-BoldItalic'), url(https://fonts.gstatic.com/s/josefinsans/v13/Qw3HZQNVED7rKGKxtqIqX5EUCETBeW0jqpg.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Josefin Sans Light'), local('JosefinSans-Light'), url(https://fonts.gstatic.com/s/josefinsans/v13/Qw3FZQNVED7rKGKxtqIqX5Ecpl5te10n.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Josefin Sans Regular'), local('JosefinSans-Regular'), url(https://fonts.gstatic.com/s/josefinsans/v13/Qw3aZQNVED7rKGKxtqIqX5EUDXx-.woff) format('woff');
+}
+@font-face {
+  font-family: 'Josefin Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Josefin Sans Bold'), local('JosefinSans-Bold'), url(https://fonts.gstatic.com/s/josefinsans/v13/Qw3FZQNVED7rKGKxtqIqX5Ectllte10n.woff) format('woff');
+}

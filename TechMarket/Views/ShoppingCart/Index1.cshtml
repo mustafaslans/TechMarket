@@ -1,0 +1,99 @@
+﻿@model TechMarket.Models.ViewModel.ShoppingCartViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <script type="text/javascript">
+        $(function () {
+            $(".RemoveLink").click(function () {
+                var silinecekid = $(this).attr("data-id");
+                if (silinecekid != '') {
+                    $.post("/ShoppingCart/RemoveToCart", { "id": silinecekid },
+                        function (data) {
+                            if (data.itemCount == 0) {
+                                $("#item-count-" + data.Deletedid).fadeOut('slow');
+                            }
+                            else {
+                                $("#item-count-" + data.Deletedid).text(data.itemCount);
+                            }
+                            $("#cart-total").text(data.CartTotal);
+                            $("#update-message").text(data.Message);
+                            $("#cart-status").text('Cart(' + data.CartTotal + ')');
+                        }
+                    )
+                }
+                location.reload();
+            })
+        })
+    </script>
+    @*<script type="text/javascript">
+            $(function () {
+                $("#gonder").click(function () {
+                    var siparis = $('#cek').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/OrderDetails/SiparisOlustur/"+siparis,
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(siparis)
+                    });
+                });
+            });
+        </script>*@
+</head>
+<div id="update-message"></div>
+<table class="table">
+    <tr>
+        <th>
+            Marka
+        </th>
+        <th>
+            Model
+        </th>
+        <th>Quantity</th>
+        <th>Price(each)</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.CartItems)
+    {
+        <tr id="row-@item.RecordId">
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Marka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Model)
+            </td>
+            <td id="item-count-@item.RecordId">
+                @item.Count
+            </td>
+            <td>
+                @item.Product.Price
+            </td>
+            <td>
+                <a href="#" class="RemoveLink btn btn-danger" data-id="@item.RecordId">
+                    Remove from Cart
+                </a>
+            </td>
+            <td></td>
+        </tr>
+    }
+    <tr>
+        <th></th>
+        <th></th>
+        <td>
+            Total
+        </td>
+        <td id="cart-total">@Model.CartTotal</td>
+        <td>
+            @{ViewBag.Total = Model.CartTotal;}
+            @*<p class="btn btn-success">
+                @Html.ActionLink(linkText: "Git", actionName: "AddressAndPayment", controllerName: "Checkout", routeValues: new { total = Model.CartTotal }, htmlAttributes: null)
+            </p>*@
+            <a class="btn btn-success" href="@Url.Action("AddressAndPayment","Checkout",new { total = Model.CartTotal })">Sonraki Adım >></a>
+        </td>
+    </tr>
+</table>
+
